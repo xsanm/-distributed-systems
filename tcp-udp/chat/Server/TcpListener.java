@@ -11,10 +11,10 @@ public class TcpListener implements Runnable {
     private final BufferedReader clientReader;
     private final PrintWriter clientWriter;
 
-    private String clientName;
+    private final String clientNick;
 
-    public TcpListener(BufferedReader clientReader, PrintWriter clientWriter, ConcurrentLinkedQueue<PrintWriter> clientWriters, String clientName) {
-        this.clientName = clientName;
+    public TcpListener(BufferedReader clientReader, PrintWriter clientWriter, ConcurrentLinkedQueue<PrintWriter> clientWriters, String clientNick) {
+        this.clientNick = clientNick;
         this.clientReader = clientReader;
         this.clientWriter = clientWriter;
         this.clientWriters = clientWriters;
@@ -26,14 +26,15 @@ public class TcpListener implements Runnable {
         while (true) {
             try {
                 newMessage = clientReader.readLine();
-                System.out.println("Server get message: " + newMessage);
+                System.out.println("Tcp message: " + newMessage);
 
                 for (PrintWriter userWriter : this.clientWriters) {
                     if (userWriter != this.clientWriter) {
-                        userWriter.println(this.clientName + ": " + newMessage);
+                        userWriter.println(this.clientNick + ": " + newMessage);
                     }
                 }
             } catch (IOException e) {
+                System.out.println("Error while sending data to clients.");
                 e.printStackTrace();
             }
         }
