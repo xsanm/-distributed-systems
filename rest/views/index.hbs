@@ -11,13 +11,57 @@
     <div class="container mt-2">
         {{>_nav}}
         <header>
-            <h2>yooo</h2>
+            <h2>Spotify data</h2>
         </header>
         <section>
-            <h2>Message</h2>
+            <h2>Device information</h2>
             <p>
-               {{message}}
+                device name: {{deviceName}}
             </p>
+            <p>
+                type: {{type}}
+            </p>
+            <p>
+                volume: {{volume}}
+            </p>
+        </section>
+        <section>
+            <h2>Song information</h2>
+            <p>
+               title: {{title}}
+            </p>
+            <p>
+                artist: {{artist}}
+            </p>
+            <p>
+                album: {{album}}
+            </p>
+            <img src="{{img}}" alt="song image"/>
+
+        </section>
+        <section>
+            <h2>Main artist</h2>
+
+            {{#each mainArtists}}
+                <div>{{this.name}}</div>
+                <img width="300" height="300" src="{{this.image_url}}"  alt="{{this.name}}"/>
+            {{/each}}
+        </section>
+        <section>
+            <h2>Featured artist</h2>
+
+            {{#each featuredArtists}}
+                <div>{{this.name}}</div>
+                <img width="300" height="300" src="{{this.image_url}}"  alt="{{this.name}}"/>
+            {{/each}}
+        </section>
+        <section>
+            <h2>Producer artist</h2>
+
+            {{#each producentArtists}}
+                <div>{{this.name}}</div>
+                <img width="300" height="300" src="{{this.image_url}}"  alt="{{this.name}}"/>
+            {{/each}}
         </section>
     </div>
 </body>
